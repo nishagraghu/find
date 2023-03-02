@@ -19,7 +19,7 @@ const RootStackScreen = () => (
       initialRouteName={'Splash'}>
       <RootStack.Screen name={'Splash'} component={Splash} />
       <RootStack.Screen name={'Mobil'} component={Mobil} />
-      <RootStack.Screen name={'Otp'} component={Otp} />
+      <RootStack.Screen name={'Otp'} component={Otp}   options={{headerShown: true ,  title: ''}} />
       <RootStack.Screen name={'MainTabScreen'} component={MainTabScreen} />
     </RootStack.Navigator>
   );

@@ -169,7 +169,7 @@ exports[`MobilInput component renders correctly 1`] = `
         style={
           {
             "alignItems": "center",
-            "backgroundColor": "#7CDB8A",
+            "backgroundColor": "#1778F2",
             "elevation": 10,
             "height": 50,
             "justifyContent": "center",
@@ -208,7 +208,7 @@ exports[`MobilInput component renders correctly 1`] = `
             ]
           }
         >
-          Submit
+          SEND
         </Text>
       </View>
     </RCTSafeAreaView>

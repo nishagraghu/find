@@ -9,8 +9,8 @@ export default function Mobil() {
         <View style={styles.container} >
             <View style={styles.container1}>
                 <Text style={styles.text} variant="headlineLarge">Welcom to App</Text>
-                <Text style={styles.text} variant="headlineSmall">Conform your Account by Enterning</Text>
-                <Text style={styles.text} variant="headlineSmall">your mobile number below</Text>
+                <Text style={styles.text} variant="titleSmall">Conform your Account by Enterning</Text>
+                <Text style={styles.text} variant="titleSmall">your mobile number below</Text>
 
 
             </View>

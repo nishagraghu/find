@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import myImage from '../../assets/login.jpg';
+import myImage from '../../assets/login.png';
 const StartImage : React.FC  = () => {
   return (
     <View>

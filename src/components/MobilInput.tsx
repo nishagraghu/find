@@ -11,8 +11,8 @@ import PhoneInput from 'react-native-phone-number-input';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import { useNavigation } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
-
-
+import { RootState,useAppDispatch } from '../store/store';
+import {sendOtp} from '../store/service/UserService';
 const MobilInput : React.FC = () => {
   const [value, setValue] = useState('');
   const[errorFlag,setFlag] =useState(false);
@@ -23,8 +23,11 @@ const MobilInput : React.FC = () => {
   const [showMessage, setShowMessage] = useState(false);
   const phoneInput = useRef<PhoneInput>(null);
   const navigation = useNavigation <any>();
+  const dispatch   = useAppDispatch();
+  
   const submitPhone  = () =>{
      if(value.length!=10){
+      dispatch(sendOtp('+918867460746'))
       setFlag(true)
       return;
      }
@@ -34,8 +37,8 @@ const MobilInput : React.FC = () => {
     // setShowMessage(true);
     // setValid(checkValid ? checkValid : false);
     // setCountryCode(phoneInput.current?.getCountryCode() || '');
-    // let getNumberAfterPossiblyEliminatingZero = phoneInput.current?.getNumberAfterPossiblyEliminatingZero();
-     navigation.navigate('Otp')
+    const { formattedNumber } = phoneInput.current?.getNumberAfterPossiblyEliminatingZero() || {};
+    navigation.navigate('Otp', { phoneNumber: formattedNumber } )
   }
 
   return (
@@ -69,7 +72,7 @@ const MobilInput : React.FC = () => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => submitPhone()}>
-            <Text   style={styles.buttonText}>Submit</Text>
+            <Text   style={styles.buttonText}>SEND</Text>
           </TouchableOpacity>
           
         </SafeAreaView>
@@ -101,7 +104,7 @@ const styles = StyleSheet.create({
     width: 300,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4267B2',
+    backgroundColor: '#1778F2',
     shadowColor: 'rgba(0,0,0,0.4)',
     shadowOffset: {
       width: 1,

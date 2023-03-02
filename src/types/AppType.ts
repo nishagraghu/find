@@ -1,6 +1,6 @@
 export interface AppType {
-    userName: string;
-    email: string;
+ 
+    phonnumber: string;
     isLoggedIn: boolean;
-    isDarkTheme: boolean;
+   
   }

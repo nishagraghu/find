@@ -12,7 +12,7 @@ describe('MobilInput', () => {
     const {getByPlaceholderText, getByText} = render(<MobilInput />);
     const phoneNumberInput = getByPlaceholderText('Phone Number');
     fireEvent(phoneNumberInput, 'changeText', '1234567890');
-    const submitButton = getByText('Submit');
+    const submitButton = getByText('SEND');
     fireEvent.press(submitButton);
     // expect some assertion here
   });
@@ -21,7 +21,7 @@ describe('MobilInput', () => {
     
      
     const {getByPlaceholderText, getByText, getByTestId} = render(<MobilInput />);
-    const submitButton = getByText('Submit');
+    const submitButton = getByText('SEND');
     const phoneInput = getByPlaceholderText('Phone Number');
     fireEvent.changeText(phoneInput, '123456789');
     fireEvent.press(submitButton);
