@@ -24,20 +24,23 @@ const MobilInput : React.FC = () => {
   const phoneInput = useRef<PhoneInput>(null);
   const navigation = useNavigation <any>();
   const dispatch   = useAppDispatch();
+  const { formattedNumber  } = phoneInput.current?.getNumberAfterPossiblyEliminatingZero() || {};
   
   const submitPhone  = () =>{
      if(value.length!=10){
-      dispatch(sendOtp('+918867460746'))
+        
       setFlag(true)
       return;
      }
+    
+     dispatch(sendOtp('+91'+value));
+    
      setFlag(false)
 
     // const checkValid = phoneInput.current?.isValidNumber(value);
     // setShowMessage(true);
     // setValid(checkValid ? checkValid : false);
     // setCountryCode(phoneInput.current?.getCountryCode() || '');
-    const { formattedNumber } = phoneInput.current?.getNumberAfterPossiblyEliminatingZero() || {};
     navigation.navigate('Otp', { phoneNumber: formattedNumber } )
   }
 

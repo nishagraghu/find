@@ -9,6 +9,9 @@ import {
   StyleSheet,
   View
 } from 'react-native';
+import { RootState,useAppDispatch } from '../store/store';
+import {sendOtp,vatifyOtp} from '../store/service/UserService';
+
 
 type RootStackParamList = {
   OtpInput: {
@@ -20,23 +23,37 @@ type OtpInputProps = {};
 
 
 const OtpInput: React.FC<OtpInputProps> = () => {
+  const dispatch = useAppDispatch();
   const [text, setText] = React.useState<string>("");
   const [remainingSeconds, setRemainingSeconds] = React.useState<number>(60);
   const [restart, setrestart] = React.useState<boolean>(false);
+  const [error, seterror] = React.useState<boolean>(false);
   const navigation = useNavigation<any>();
 
   const handleResendOtp = () => {
     setrestart(true)
+    seterror(false)
     // setRemainingSeconds(60);
   }
-  const { phoneNumber } = useRoute().params as { phoneNumber: string };
 
+  const { phoneNumber } = useRoute().params as { phoneNumber: string };
+  const submitPhone = () => {
+    
+    if (text.length == 0) {
+      seterror(true)
+    } else {
+      seterror(false)
+      console.log({mobilenumber:phoneNumber,otp:text});
+       dispatch(vatifyOtp({mobilenumber:phoneNumber,otp:text}));
+    }
+
+  }
   return (
     <>
       <Text variant="headlineMedium" style={styles.bold}>Verification Code</Text>
       <Text variant="labelLarge" style={styles.blured}>Please enter the verification code sent to</Text>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        
+
         <Text variant="labelLarge">to</Text>
         <Text variant="labelLarge" style={styles.bold} > {phonNumberFormat(phoneNumber)}</Text>
 
@@ -57,11 +74,12 @@ const OtpInput: React.FC<OtpInputProps> = () => {
       />
       <View style={styles.timer}>
         <OneMinuteTimer seconds={remainingSeconds} restart={restart} setrestart={setrestart} />
-
+       
       </View>
+      {error&&<Text style={styles.error} >PLEASE ENTER OTP</Text>}
       <TouchableOpacity
         style={styles.button}
-      // onPress={() => submitPhone()}
+        onPress={() => submitPhone()}
       >
 
         <Text style={styles.buttonText}>VERIFY</Text>
@@ -88,6 +106,10 @@ const OtpInput: React.FC<OtpInputProps> = () => {
 };
 
 const styles = StyleSheet.create({
+  error:{
+  color: 'red',
+ 
+  },
   editLink: {
     marginLeft: 10,
     // marginTop: 80,
@@ -113,7 +135,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   bold: {
-    
+
     fontWeight: 'bold'
   },
   erorText: {
