@@ -1,7 +1,7 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {intialStateApp} from '../state/AppState';
-import {AppType} from  '../../types/AppType';
-import {sendOtp ,vatifyOtp } from '../service/UserService';
+import { createSlice } from '@reduxjs/toolkit';
+import { intialStateApp } from '../state/AppState';
+import { AppType } from '../../types/AppType';
+import { sendOtp, vatifyOtp } from '../service/UserService';
 import { save, getValueFor } from '../service/secure-store-utils';
 
 
@@ -10,59 +10,62 @@ import { save, getValueFor } from '../service/secure-store-utils';
 const authSlice = createSlice({
   name: 'userAuth',
   initialState: intialStateApp,
-  reducers: {
-    // setSignIn: (state: AppType, action:{payload: {email: string, isLoggedIn: boolean, userName: string}}) => {
-    //   state.email = action.payload.email;
-    //   state.isLoggedIn = action.payload.isLoggedIn;
-    //   state.userName = action.payload.userName;
-    // },
-    // setSignOut: (state: AppType) => {
-    //   state.email = '';
-    //   state.userName = '';
-    //   state.isLoggedIn = false;
-    // },
+  reducers: { 
+    setSignIn: (state: AppType, action:{payload: {jwt: string }}) => {
+      state.jwt = action.payload.jwt;
+     
+      state.isLoggedIn = false;
+
+     
+    },
+    setSignOut: (state: AppType) => {
+      state.jwt = '';
+      state.phonnumber = '';
+      state.isLoggedIn = false;
+    },
   },
   extraReducers: builder => {
     builder.addCase(sendOtp.pending, state => {
       state.isLoggedIn = true;
-      console.log('requst started');
-    
+
+
     });
-    builder.addCase(sendOtp.fulfilled, (state,action) => {
-      console.log(action.payload);
-      // state.isLoggedIn = true;
-     
-      console.log('requst ok');
+    builder.addCase(sendOtp.fulfilled, (state, action) => {
       
+      // state.isLoggedIn = true;
+
+
+
     });
-    builder.addCase(sendOtp.rejected, (state,action) => {
-     
-      console.log('requst rejected');
-      console.log(action.payload);
+    builder.addCase(sendOtp.rejected, (state, action) => {
+
+
       state.isLoggedIn = true;
     });
     builder.addCase(vatifyOtp.pending, state => {
       state.isLoggedIn = true;
-      
+
+
+    });
+    builder.addCase(vatifyOtp.fulfilled, (state, action) => {
+
+      const { jwt } = action.payload;
      
-    });
-    builder.addCase(vatifyOtp.fulfilled, (state,action) => {
+     save('jwt',action.payload.jwt)
     
-      const {jwt} = action.payload;
-      save('jwt', jwt)
-      state.isLoggedIn = true;
-      
+      state.jwt = jwt
+      state.isLoggedIn = false;
+
     });
-    builder.addCase(vatifyOtp.rejected, (state,action) => {
-      console.log(action);
-      console.log('54');
+    builder.addCase(vatifyOtp.rejected, (state, action) => {
+      console.log('rejected');
       state.isLoggedIn = true;
     });
 
-    
-    
+
+
   },
 });
 
-// export const {setSignIn, setSignOut} = authSlice.actions;
+export const {setSignIn, setSignOut} = authSlice.actions;
 export default authSlice.reducer;

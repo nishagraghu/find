@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import phonNumberFormat from '../utils/phonNumberFormat';
 import OneMinuteTimer from '../components/OneMinuteTimer';
 import { useNavigation } from '@react-navigation/native';
+import { useStore, useSelector } from 'react-redux';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -29,13 +30,23 @@ const OtpInput: React.FC<OtpInputProps> = () => {
   const [restart, setrestart] = React.useState<boolean>(false);
   const [error, seterror] = React.useState<boolean>(false);
   const navigation = useNavigation<any>();
-
+  
+  
+  const {jwt} = useSelector((state :RootState ) => state.userAuth) || '' ;
   const handleResendOtp = () => {
     setrestart(true)
     seterror(false)
     // setRemainingSeconds(60);
   }
-
+  React.useEffect(() => {
+    if (jwt) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'MainTabScreen' }],
+      });
+      // navigation.navigate('MainTabScreen')
+    }
+  }, [jwt, navigation]);
   const { phoneNumber } = useRoute().params as { phoneNumber: string };
   const submitPhone = () => {
     
@@ -43,8 +54,9 @@ const OtpInput: React.FC<OtpInputProps> = () => {
       seterror(true)
     } else {
       seterror(false)
-      console.log({mobilenumber:phoneNumber,otp:text});
+     
        dispatch(vatifyOtp({mobilenumber:phoneNumber,otp:text}));
+     
     }
 
   }
@@ -82,7 +94,7 @@ const OtpInput: React.FC<OtpInputProps> = () => {
         onPress={() => submitPhone()}
       >
 
-        <Text style={styles.buttonText}>VERIFY</Text>
+        <Text style={styles.buttonText}>VERIFY  {jwt}</Text>
       </TouchableOpacity>
 
       {/* <Text variant="labelLarge" style={styles.resendlinkText}>Having Problem ?

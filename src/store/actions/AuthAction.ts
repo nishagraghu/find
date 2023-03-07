@@ -1,0 +1,1 @@
+export const JWT_CHANGE = 'JWT_CHANGE'

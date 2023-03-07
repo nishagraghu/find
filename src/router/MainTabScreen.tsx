@@ -4,11 +4,11 @@ import {
     createNativeStackNavigator,
     NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import Splash from '../screens/Splash';
+import Start from '../screens/Start';
 import Mobil from '../screens/Mobil';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile'
-
+import {HeaderButtons} from '../components/HeaderButtons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -24,8 +24,10 @@ const MainTabScreen = () => (
           }} />
         {/* <Tab.Screen name="Mobil" component={Mobil} /> */}
         <Tab.Screen name="Profile" component={Profile}
+          
          options={{
-            tabBarLabel: 'Profile',
+        
+            headerRight: () => <HeaderButtons  />,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" color={color} size={size} />
             ),

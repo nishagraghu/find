@@ -41,7 +41,8 @@ const MobilInput : React.FC = () => {
     // setShowMessage(true);
     // setValid(checkValid ? checkValid : false);
     // setCountryCode(phoneInput.current?.getCountryCode() || '');
-    navigation.navigate('Otp', { phoneNumber: formattedNumber } )
+    
+    navigation.navigate('Otp', { phoneNumber: '+91'+value } )
   }
 
   return (

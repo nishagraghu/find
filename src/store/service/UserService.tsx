@@ -11,7 +11,7 @@ export const sendOtp = createAsyncThunk('users/fetchUser', async (mobilenumber: 
   
   try {
     console.log(`${URL}auth/create`, postData);
-    const response = await axios.post(`${URL}auth/create`, postData, {
+    const response = await axios.post(`${URL}/auth/create`, postData, {
       headers: {
         Accept: 'application/json',
       },
@@ -26,10 +26,10 @@ export const sendOtp = createAsyncThunk('users/fetchUser', async (mobilenumber: 
 
 export const vatifyOtp = createAsyncThunk('users/vatifyOtp', async (payload: VerifyOtpPayload ) => {
   const postData = { mobilenumber: payload.mobilenumber, otp: parseInt(payload.otp) };
-  
+ 
   try {
-   
-    const response = await axios.post(`${URL}auth/login`, postData, {
+   console.log(`${URL}/auth/login`, postData);
+    const response = await axios.post(`${URL}/auth/login`, postData, {
       headers: {
         Accept: 'application/json',
       },
