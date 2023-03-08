@@ -12,6 +12,13 @@ export async function save(key: string, value: any) {
   }
 }
 
+export async function removeValue(key: string) {
+  try {
+    await SecureStore.deleteItemAsync(key);
+  } catch (error) {
+    console.error(`Error removing ${key}: ${error}`);
+  }
+}
 export async function getValueFor(key: string) {
   try {
     const jsonValue = await SecureStore.getItemAsync(key);

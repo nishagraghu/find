@@ -2,11 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
-export default function Login() {
+export default function Enquery() {
+ 
+  
   return (
    
     <View style={styles.container}>
-      <Text>Login </Text>
+      <Text>Enquery </Text>
       <StatusBar style="auto" />
     </View>
    

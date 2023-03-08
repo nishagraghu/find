@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { intialStateApp } from '../state/AppState';
 import { AppType } from '../../types/AppType';
 import { sendOtp, vatifyOtp } from '../service/UserService';
-import { save, getValueFor } from '../service/secure-store-utils';
+import { save, getValueFor ,removeValue } from '../service/secure-store-utils';
 
 
 
@@ -19,9 +19,11 @@ const authSlice = createSlice({
      
     },
     setSignOut: (state: AppType) => {
+      
       state.jwt = '';
       state.phonnumber = '';
       state.isLoggedIn = false;
+      removeValue('jwt')
     },
   },
   extraReducers: builder => {
