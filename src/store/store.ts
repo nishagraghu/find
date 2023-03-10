@@ -1,5 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
-import authReDucer from '../store/slices/authSlice'
+import authReDucer from '../store/slices/authSlice';
+import usersReducer from '../store/slices/userInfoSlice';
+
 // import usersReducer from '../slices/userSlice';
 // import themeReducer from '../slices/themeSlice';
 import {useDispatch} from 'react-redux';
@@ -7,7 +9,7 @@ import {useDispatch} from 'react-redux';
 const store = configureStore({
   reducer: {
     userAuth: authReDucer,
-    // users: usersReducer,
+    userInfo: usersReducer,
     // theme: themeReducer,
   },
 });

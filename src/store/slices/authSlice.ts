@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { intialStateApp } from '../state/AppState';
 import { AppType } from '../../types/AppType';
 import { sendOtp, vatifyOtp } from '../service/UserService';
-import { save, getValueFor ,removeValue } from '../service/secure-store-utils';
+import { save, getValueFor, removeValue } from '../service/secure-store-utils';
 
 
 
@@ -10,19 +10,21 @@ import { save, getValueFor ,removeValue } from '../service/secure-store-utils';
 const authSlice = createSlice({
   name: 'userAuth',
   initialState: intialStateApp,
-  reducers: { 
-    setSignIn: (state: AppType, action:{payload: {jwt: string }}) => {
+  reducers: {
+    setSignIn: (state: AppType, action: { payload: { jwt: string ,mobilenumber: string} }) => {
       state.jwt = action.payload.jwt;
-     
+      state.phonnumber= action.payload.mobilenumber;
+
       state.isLoggedIn = false;
 
-     
+
     },
     setSignOut: (state: AppType) => {
-      
+
       state.jwt = '';
       state.phonnumber = '';
       state.isLoggedIn = false;
+     
       removeValue('jwt')
     },
   },
@@ -33,7 +35,7 @@ const authSlice = createSlice({
 
     });
     builder.addCase(sendOtp.fulfilled, (state, action) => {
-      
+  
       // state.isLoggedIn = true;
 
 
@@ -50,17 +52,17 @@ const authSlice = createSlice({
 
     });
     builder.addCase(vatifyOtp.fulfilled, (state, action) => {
-
-      const { jwt } = action.payload;
-     
-     save('jwt',action.payload.jwt)
+      save('jwt',action.payload.jwt);
+      save('mobilenumber',action.payload.mobilenumber);
     
-      state.jwt = jwt
-      state.isLoggedIn = false;
+      const { jwt, mobilenumber } = action.payload;
+      return  state = { ...state, jwt, phonnumber: mobilenumber, isLoggedIn: false }; 
+     
+
 
     });
     builder.addCase(vatifyOtp.rejected, (state, action) => {
-      console.log('rejected');
+    
       state.isLoggedIn = true;
     });
 
@@ -69,5 +71,5 @@ const authSlice = createSlice({
   },
 });
 
-export const {setSignIn, setSignOut} = authSlice.actions;
+export const { setSignIn, setSignOut } = authSlice.actions;
 export default authSlice.reducer;

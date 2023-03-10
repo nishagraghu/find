@@ -33,7 +33,7 @@ export default function Profile() {
         if (!supported) {
 
           onToggleSnackBar()
-          console.log(`WhatsApp is not installed on ${Platform.OS}`);
+          // console.log(`WhatsApp is not installed on ${Platform.OS}`);
         } else {
           return Linking.openURL(url);
         }
@@ -164,7 +164,7 @@ export default function Profile() {
               right={() => (
                 <Ionicons name="chevron-forward-outline" size={24} color="#1877F2" style={{ marginLeft: 'auto' }} />
               )}
-              
+
             />
             <List.Item
               title="share App"
@@ -213,7 +213,7 @@ export default function Profile() {
               )}
               onPress={() => {
                 // add your logout logic here
-                console.log('Logged out!');
+              
                 setLogout(true)
               }}
             />

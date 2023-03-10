@@ -39,6 +39,7 @@ const OtpInput: React.FC<OtpInputProps> = () => {
     // setRemainingSeconds(60);
   }
   React.useEffect(() => {
+   
     if (jwt) {
       navigation.reset({
         index: 0,
