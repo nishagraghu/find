@@ -1,5 +1,5 @@
 
-import { AppType, UserInfoType } from '../../types/AppType';
+import { AppType, UserInfoType ,FilterType } from '../../types/AppType';
 
 
 //Initial state of application
@@ -17,6 +17,37 @@ export const intialuserInfoStateApp: UserInfoType = {
   address2: '',
   city: '',
   state: '',
-  pincode: ''
+  pincode: '',
+  
+
+};
+export const intialuserFilterInfoStateApp: FilterType = {
+  loading: false,
+  selectedbroand:{
+    id:0,
+    value: '',
+    logo: '',
+
+
+   },
+   selectedModel:{
+    id:0,
+    value: '',
+    
+   },
+   selectedyearofmake:{
+    id : 0,
+    value : ''
+    
+   },
+   selectedvariant: {
+    id: 0,
+    value: '',
+  },
+
+  yearofmakes:[],
+   models:[],
+   brands:[],
+   variants:[]
 
 };

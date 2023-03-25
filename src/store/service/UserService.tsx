@@ -39,7 +39,7 @@ export const vatifyOtp = createAsyncThunk('users/vatifyOtp', async (payload: Ver
     return response.data;
   } catch (error) {
     
-    // console.log(error.message);
+
     throw new Error('error ');
   }
 });

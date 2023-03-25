@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import authReDucer from '../store/slices/authSlice';
 import usersReducer from '../store/slices/userInfoSlice';
+import filterReducer from '../store/slices/filterSlice';
 
 // import usersReducer from '../slices/userSlice';
 // import themeReducer from '../slices/themeSlice';
@@ -10,7 +11,7 @@ const store = configureStore({
   reducer: {
     userAuth: authReDucer,
     userInfo: usersReducer,
-    // theme: themeReducer,
+    filterInfo: filterReducer,
   },
 });
 

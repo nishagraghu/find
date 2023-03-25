@@ -1,15 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-
+import { TextInput } from 'react-native-paper';
 export default function LegalInformation() {
  
   
   return (
    
     <View style={styles.container}>
-      <Text>LegalInformation </Text>
-      <StatusBar style="auto" />
+      <TextInput
+      mode="outlined"
+      label="Outlined input"
+      placeholder="Type something"
+     
+    />
     </View>
    
   );

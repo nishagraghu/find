@@ -12,6 +12,8 @@ import EditAddress from '../screens/EditAddress';
 import Help from '../screens/Help';
 import Enquery from '../screens/Enquery';
 import LegalInformation from '../screens/LegalInformation'; 
+import Filter from '../screens/Filter'; 
+import Products from '../screens/Products'; 
 
 
 import Splash from '../screens/Splash';
@@ -33,6 +35,8 @@ const RootStackScreen = () => (
       <RootStack.Screen name={'HelpScreen'} component={Help} options={{headerShown: true ,  title: 'Help & Support'}} />
       <RootStack.Screen name={'EditAddress'} component={EditAddress} options={{headerShown: true ,  title: 'Edit Address'}} />
       <RootStack.Screen name={'LegalInformation'} component={LegalInformation} options={{headerShown: true ,  title: 'Legal Information'}} />
+      <RootStack.Screen name={'filter'} component={Filter} options={{headerShown: true ,  title: ''}} />
+      <RootStack.Screen name={'products'} component={Products} options={{headerShown: true ,  title: ''}} />
          
     </RootStack.Navigator>
   );
